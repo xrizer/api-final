@@ -7,13 +7,13 @@ model1, model2, model3 = load_models()
 app = Flask(__name__)
 @app.route('/',methods=['GET'])
 def hello_world():
-    return jsonify({'test':'berhasil'})
+    return render_template('index.html')
 
 
 @app.route('/predict',methods=['POST'])
 def coba():
     imagefile = request.files['']
-    img_path = 'tmp/' + imagefile.filename
+    img_path = 'images/' + imagefile.filename
     imagefile.save(img_path)
     result, peluang, count = main(img_path, model1, model2, model3)
     hasil = report(result, peluang, count)
